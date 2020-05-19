@@ -27,11 +27,10 @@ return [
             [
                 'host' => 'rabbitmq',
                 'port' => '5672',
-                'user' => 'guest',
-                'password' => 'guest',
-                'virtualhost' => '/',
+                'username' => 'guest',
+                'password' => 'guest'
             ]
-        ],
+        ]
     ])),
     'MAGENTO_CLOUD_ROUTES' => base64_encode(json_encode([
         'http://magento2.docker/' => [

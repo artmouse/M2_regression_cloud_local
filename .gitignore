@@ -14,7 +14,7 @@
 !/app/etc/config.php.ent.dist
 !/app/etc/config.php.mid.dist
 !/app/i18n/**
-!/auth.json
+!/auth.json.sample
 !/build_options.ini
 !/composer.json
 !/composer.lock

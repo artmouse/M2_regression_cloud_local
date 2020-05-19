@@ -29,6 +29,10 @@ services:
     image: 'magento/magento-cloud-docker-elasticsearch:6.5-1.0'
     networks:
       - magento
+  rabbitmq:
+    image: 'rabbitmq:3.8'
+    networks:
+      - magento
   fpm:
     image: 'magento/magento-cloud-docker-php:7.3-fpm-1.0'
     extends: generic
@@ -48,6 +52,7 @@ services:
       - db
       - redis
       - elasticsearch
+      - rabbitmq
     volumes:
       - 'magento-sync:/app'
       - '~/.composer/cache:/root/.composer/cache:delegated'
@@ -63,6 +68,7 @@ services:
       - db
       - redis
       - elasticsearch
+      - rabbitmq
     volumes:
       - 'magento-sync:/app'
       - '~/.composer/cache:/root/.composer/cache:delegated'
@@ -124,6 +130,7 @@ services:
       - db
       - redis
       - elasticsearch
+      - rabbitmq
     volumes:
       - 'magento-sync:/app'
       - '~/.composer/cache:/root/.composer/cache:delegated'
@@ -140,10 +147,10 @@ services:
       - PHP_IDE_CONFIG=serverName=magento_cloud_docker
       - XDEBUG_CONFIG=remote_host=host.docker.internal
       - MFTF_UTILS=1
-      - MAGENTO_CLOUD_RELATIONSHIPS=eyJkYXRhYmFzZSI6W3siaG9zdCI6ImRiIiwicGF0aCI6Im1hZ2VudG8yIiwicGFzc3dvcmQiOiJtYWdlbnRvMiIsInVzZXJuYW1lIjoibWFnZW50bzIiLCJwb3J0IjoiMzMwNiJ9XSwicmVkaXMiOlt7Imhvc3QiOiJyZWRpcyIsInBvcnQiOiI2Mzc5In1dLCJlbGFzdGljc2VhcmNoIjpbeyJob3N0IjoiZWxhc3RpY3NlYXJjaCIsInBvcnQiOiI5MjAwIn1dfQ==
-      - MAGENTO_CLOUD_ROUTES=eyJodHRwOlwvXC9zaG9wLm1hZ2VudG8yLmRvY2tlclwvIjp7InR5cGUiOiJ1cHN0cmVhbSIsIm9yaWdpbmFsX3VybCI6Imh0dHA6XC9cL3tkZWZhdWx0fSJ9LCJodHRwczpcL1wvc2hvcC5tYWdlbnRvMi5kb2NrZXJcLyI6eyJ0eXBlIjoidXBzdHJlYW0iLCJvcmlnaW5hbF91cmwiOiJodHRwczpcL1wve2RlZmF1bHR9In19
+      - MAGENTO_CLOUD_RELATIONSHIPS=eyJkYXRhYmFzZSI6W3siaG9zdCI6ImRiIiwicGF0aCI6Im1hZ2VudG8yIiwicGFzc3dvcmQiOiJtYWdlbnRvMiIsInVzZXJuYW1lIjoibWFnZW50bzIiLCJwb3J0IjoiMzMwNiJ9XSwicmVkaXMiOlt7Imhvc3QiOiJyZWRpcyIsInBvcnQiOiI2Mzc5In1dLCJlbGFzdGljc2VhcmNoIjpbeyJob3N0IjoiZWxhc3RpY3NlYXJjaCIsInBvcnQiOiI5MjAwIn1dLCJyYWJiaXRtcSI6W3siaG9zdCI6InJhYmJpdG1xIiwicG9ydCI6IjU2NzIiLCJ1c2VybmFtZSI6Imd1ZXN0IiwicGFzc3dvcmQiOiJndWVzdCJ9XX0=
+      - MAGENTO_CLOUD_ROUTES=eyJodHRwOlwvXC9tYWdlbnRvMi5kb2NrZXJcLyI6eyJ0eXBlIjoidXBzdHJlYW0iLCJvcmlnaW5hbF91cmwiOiJodHRwOlwvXC97ZGVmYXVsdH0ifSwiaHR0cHM6XC9cL21hZ2VudG8yLmRvY2tlclwvIjp7InR5cGUiOiJ1cHN0cmVhbSIsIm9yaWdpbmFsX3VybCI6Imh0dHBzOlwvXC97ZGVmYXVsdH0ifX0=
       - MAGENTO_CLOUD_VARIABLES=eyJBRE1JTl9FTUFJTCI6ImFkbWluQGV4YW1wbGUuY29tIiwiQURNSU5fUEFTU1dPUkQiOiIxMjMxMjNxIiwiQURNSU5fVVJMIjoiYWRtaW4ifQ==
-      - 'PHP_EXTENSIONS=bcmath bz2 calendar exif gd gettext intl mysqli pcntl pdo_mysql soap sockets sysvmsg sysvsem sysvshm opcache zip redis xsl sodium'
+      - 'PHP_EXTENSIONS=bcmath bz2 calendar exif gd gettext intl mysqli pcntl pdo_mysql soap sockets sysvmsg sysvsem sysvshm opcache zip redis xsl'
   cron:
     image: 'magento/magento-cloud-docker-php:7.3-cli-1.0'
     extends: generic
@@ -152,6 +159,7 @@ services:
       - db
       - redis
       - elasticsearch
+      - rabbitmq
     volumes:
       - 'magento-sync:/app'
       - '~/.composer/cache:/root/.composer/cache:delegated'
